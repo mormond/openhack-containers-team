@@ -1,0 +1,29 @@
+#This is a SecretProviderClass example using user-assigned identity to access Key Vault
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+kind: SecretProviderClass
+metadata:
+  name: azure-kvname-user-msi
+  namespace: api
+spec:
+  provider: azure
+  secretObjects:                                 # [OPTIONAL] SecretObject defines the desired state of synced K8s secret objects
+  - secretName: sql-server
+    type: Opaque
+    data: 
+    - objectName: SQL-PASSWORD                    # name of the mounted content to sync. this could be the object name or object alias 
+      key: pwd  
+  parameters:
+    usePodIdentity: "false"
+    useVMManagedIdentity: "true"
+    userAssignedIdentityID: "1fc2704e-887a-4edb-b989-7f738be10436"
+    keyvaultName: "k8s-secrets-meo"
+    cloudName: ""                   # [OPTIONAL for Azure] if not provided, azure environment will default to AzurePublicCloud
+    objects:  |
+      array:
+        - |
+          objectName: SQL-PASSWORD
+          objectType: secret        # object types: secret, key or cert
+          objectVersion: ""         # [OPTIONAL] object versions, default to latest if empty
+    resourceGroup: "teamResources-4"
+    subscriptionId: "012f1462-c8ff-4ca5-be75-9a6360ab645d" 
+    tenantId: "72f988bf-86f1-41af-91ab-2d7cd011db47"                 # the tenant ID of the KeyVault  
