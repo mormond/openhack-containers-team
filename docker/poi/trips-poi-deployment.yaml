@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poi
+  namespace: api
+  labels:
+    app: trips
+    component: poi
+spec:
+  selector:
+    matchLabels:
+      app: trips
+      component: poi
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: trips
+        component: poi
+    spec:
+      containers:
+      - name: poi
+        image: registryucj0309.azurecr.io/tripinsights/poi:1.0
+        ports:
+        - containerPort: 80
+        env:
+        - name: SQL_USER
+          value: sqladminuCj0309
+        - name: SQL_PASSWORD
+          value: F4EC5SLm3Bf7
+        - name: SQL_SERVER
+          value: sqlserverucj0309.database.windows.net
