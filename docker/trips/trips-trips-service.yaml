@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: trips
+  labels:
+    app: trips
+    component: trips
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: trips
+    component: trips
