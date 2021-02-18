@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trip-viewer
+  labels:
+    app: trips
+    component: trip-viewer
+spec:
+  selector:
+    matchLabels:
+      app: trips
+      component: trip-viewer
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: trips
+        component: trip-viewer
+    spec:
+      containers:
+      - name: trip-viewer
+        image: registryucj0309.azurecr.io/tripinsights/tripviewer:1.0
+        ports:
+        - containerPort: 80
+        env:
+        - name: USERPROFILE_API_ENDPOINT
+          value: http://user
+        - name: TRIPS_API_ENDPOINT
+          value: http://trips
