@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-java
+  name: user-java-deployment
   namespace: api
   labels:
     app: trips
