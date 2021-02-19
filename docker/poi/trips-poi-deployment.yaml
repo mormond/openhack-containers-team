@@ -29,13 +29,19 @@ spec:
           readOnly: true
         env:
         - name: SQL_USER
-          value: sqladminuCj0309
+          valueFrom:
+            secretKeyRef:
+              name: sql-server-user
+              key: user 
         - name: SQL_SERVER
-          value: sqlserverucj0309.database.windows.net
+          valueFrom:
+            secretKeyRef:
+              name: sql-server-server
+              key: server 
         - name: SQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: sql-server
+              name: sql-server-pwd
               key: pwd 
       volumes:
         - name: secrets-store-inline

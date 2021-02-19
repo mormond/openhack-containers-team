@@ -23,10 +23,30 @@ spec:
         image: registryucj0309.azurecr.io/tripinsights/user-java:1.0
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: secrets-store-inline
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
         env:
         - name: SQL_USER
-          value: sqladminuCj0309
-        - name: SQL_PASSWORD
-          value: F4EC5SLm3Bf7
+          valueFrom:
+            secretKeyRef:
+              name: sql-server-user
+              key: user 
         - name: SQL_SERVER
-          value: sqlserverucj0309.database.windows.net
+          valueFrom:
+            secretKeyRef:
+              name: sql-server-server
+              key: server 
+        - name: SQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sql-server-pwd
+              key: pwd 
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: azure-kvname-user-msi   

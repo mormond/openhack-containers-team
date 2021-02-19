@@ -7,11 +7,21 @@ metadata:
 spec:
   provider: azure
   secretObjects:                                 # [OPTIONAL] SecretObject defines the desired state of synced K8s secret objects
-  - secretName: sql-server
+  - secretName: sql-server-pwd
     type: Opaque
     data: 
     - objectName: SQL-PASSWORD                    # name of the mounted content to sync. this could be the object name or object alias 
-      key: pwd  
+      key: pwd
+  - secretName: sql-server-user
+    type: Opaque
+    data: 
+    - objectName: SQL-USER                    # name of the mounted content to sync. this could be the object name or object alias 
+      key: user
+  - secretName: sql-server-server
+    type: Opaque
+    data: 
+    - objectName: SQL-SERVER                    # name of the mounted content to sync. this could be the object name or object alias 
+      key: server                       
   parameters:
     usePodIdentity: "false"
     useVMManagedIdentity: "true"
@@ -22,6 +32,14 @@ spec:
       array:
         - |
           objectName: SQL-PASSWORD
+          objectType: secret        # object types: secret, key or cert
+          objectVersion: ""         # [OPTIONAL] object versions, default to latest if empty
+        - |
+          objectName: SQL-USER
+          objectType: secret        # object types: secret, key or cert
+          objectVersion: ""         # [OPTIONAL] object versions, default to latest if empty
+        - |
+          objectName: SQL-SERVER
           objectType: secret        # object types: secret, key or cert
           objectVersion: ""         # [OPTIONAL] object versions, default to latest if empty
     resourceGroup: "teamResources-4"
