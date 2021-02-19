@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: trip-viewer
+  name: trip-viewer-deployment
   namespace: web
   labels:
     app: trips
@@ -25,6 +25,6 @@ spec:
         - containerPort: 80
         env:
         - name: USERPROFILE_API_ENDPOINT
-          value: http://user
+          value: http://user-service.api
         - name: TRIPS_API_ENDPOINT
-          value: http://trips
+          value: http://trips-service.api
