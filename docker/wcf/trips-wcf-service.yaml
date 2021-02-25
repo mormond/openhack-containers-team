@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wcf-service
+  namespace: win
+  labels:
+    app: trips
+    component: wcf
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: trips
+    component: wcf

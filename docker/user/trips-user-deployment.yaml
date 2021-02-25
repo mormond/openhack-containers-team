@@ -49,4 +49,6 @@ spec:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: azure-kvname-user-msi   
+              secretProviderClass: azure-kvname-user-msi 
+      nodeSelector:
+        kubernetes.io/os: linux  

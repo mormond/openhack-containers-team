@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: trip-viewer
-        image: registryucj0309.azurecr.io/tripinsights/tripviewer:1.0
+        image: registryucj0309.azurecr.io/tripviewer2:1.0
         ports:
         - containerPort: 80
         env:
@@ -28,3 +28,7 @@ spec:
           value: http://user-service.api
         - name: TRIPS_API_ENDPOINT
           value: http://trips-service.api
+        - name: WCF_ENDPOINT
+          value: http://wcf-service.win
+      nodeSelector:
+        kubernetes.io/os: linux

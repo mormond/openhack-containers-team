@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wcf-deployment
+  namespace: win
+  labels:
+    app: trips
+    component: wcf
+spec:
+  selector:
+    matchLabels:
+      app: trips
+      component: wcf
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: trips
+        component: wcf
+    spec:
+      containers:
+      - name: wcf
+        image: registryucj0309.azurecr.io/wcfservice:1.0
+        ports:
+        - containerPort: 80
+      nodeSelector:
+        kubernetes.io/os: windows
