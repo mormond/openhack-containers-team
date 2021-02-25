@@ -25,7 +25,7 @@ spec:
   parameters:
     usePodIdentity: "false"
     useVMManagedIdentity: "true"
-    userAssignedIdentityID: "1fc2704e-887a-4edb-b989-7f738be10436"
+    userAssignedIdentityID: "483a1477-c0b2-4fd2-b0a3-38ee23549c72"
     keyvaultName: "k8s-secrets-meo"
     cloudName: ""                   # [OPTIONAL for Azure] if not provided, azure environment will default to AzurePublicCloud
     objects:  |

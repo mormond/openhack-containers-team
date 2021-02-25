@@ -118,7 +118,7 @@ data:
   integrations: |-
     [integrations.azure_network_policy_manager]
         collect_basic_metrics = false
-        collect_advanced_metrics = false
+        collect_advanced_metrics = true
 metadata:
   name: container-azm-ms-agentconfig
   namespace: kube-system
